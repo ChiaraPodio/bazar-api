@@ -1,6 +1,6 @@
 # Bazar API
 
-Proyecto desarrollado en **Java con Spring Boot** para gestionar un sistema de ventas de un bazar.
+Proyecto desarrollado en **Java con Spring Boot** para gestionar las ventas de un bazar.
 
 ## Tecnologías utilizadas
 - Java 17
