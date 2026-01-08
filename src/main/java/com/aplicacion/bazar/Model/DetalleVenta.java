@@ -45,7 +45,7 @@ public class DetalleVenta {
         this.producto = producto;
         this.cantidad = cantidad;
         this.precioUnitarioVenta = precioUnitarioVenta;
-        this.subtotal = cantidad * precioUnitarioVenta;
+        this.subtotal = subtotal;
     }
     
     

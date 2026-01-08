@@ -30,12 +30,6 @@ public class Venta {
     private LocalDate fecha_venta;
     private Double total;
     
-//    @OneToOne
-//    @JoinColumn (name= "idCliente",                 //nombre fk
-//            referencedColumnName = "id_cliente")    //nombre atributo de clase
-//    private Cliente unCliente;
-    
-    //agregado
     @ManyToOne
     @JoinColumn(name = "idCliente")
     private Cliente unCliente;

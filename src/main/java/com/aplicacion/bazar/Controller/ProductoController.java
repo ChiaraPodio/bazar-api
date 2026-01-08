@@ -4,11 +4,11 @@
  */
 package com.aplicacion.bazar.Controller;
 
+import com.aplicacion.bazar.DTO.ProductoDTO;
 import com.aplicacion.bazar.Model.Producto;
 import com.aplicacion.bazar.Service.IProductoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,30 +16,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author chiarapodio
  */
-@Controller
+@RestController
 public class ProductoController {
     
     @Autowired
     private IProductoService productoServ;
     
-//    @PostMapping("/producto/crear")
-//    public String saveProducto (@RequestBody Producto producto) {
-//        productoServ.saveProducto(producto);
-//        
-//        return "Producto creado correctamente";
-//    }
-    
     @PostMapping("/producto/crear")
-    public String saveProducto (@RequestParam String nuevoNombre,
-                                @RequestParam String nuevaMarca,
-                                @RequestParam Double nuevoPrecioUnitarioActual,
-                                @RequestParam Double nuevoStock) {
-        productoServ.crearProducto(nuevoNombre, nuevaMarca, nuevoStock, nuevoPrecioUnitarioActual);
+    public String saveProducto (@RequestBody ProductoDTO productoDTO) {
+        productoServ.crearProducto(productoDTO); 
         
         return "Producto creado correctamente";
     }

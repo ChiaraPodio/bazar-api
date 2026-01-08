@@ -5,6 +5,7 @@
 package com.aplicacion.bazar.Service;
 
 import com.aplicacion.bazar.DTO.DetalleVentaDTO;
+import com.aplicacion.bazar.DTO.ProductoDTO;
 import com.aplicacion.bazar.Model.Producto;
 import com.aplicacion.bazar.Model.Venta;
 import java.util.List;
@@ -35,7 +36,7 @@ public interface IProductoService {
      
      public List <Producto> getProductosConStockMenorA5();
      
-     public void crearProducto (String nombre,String marca, Double stock, Double precioUnitarioActual);
+     public void crearProducto (ProductoDTO productoDTO);
      
     
     

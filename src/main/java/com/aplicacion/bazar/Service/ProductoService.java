@@ -5,6 +5,7 @@
 package com.aplicacion.bazar.Service;
 
 import com.aplicacion.bazar.DTO.DetalleVentaDTO;
+import com.aplicacion.bazar.DTO.ProductoDTO;
 import com.aplicacion.bazar.Model.DetalleVenta;
 import com.aplicacion.bazar.Model.Producto;
 import com.aplicacion.bazar.Model.Venta;
@@ -113,22 +114,17 @@ public class ProductoService implements IProductoService {
     }
     
     @Override
-    public void crearProducto (String nombre,String marca, Double stock, Double precioUnitarioActual) {
+    public void crearProducto (ProductoDTO productoDTO) {
         Producto producto = new Producto();
         List <DetalleVenta> detallesEnLosQueEstaProducto = new ArrayList<>();
-        producto.setNombre(nombre);
-        producto.setMarca(marca);
-        producto.setStock(stock);
-        producto.setPrecioUnitarioActual(precioUnitarioActual);
+        producto.setNombre(productoDTO.getNombre());
+        producto.setMarca(productoDTO.getMarca());
+        producto.setStock(productoDTO.getStock());
+        producto.setPrecioUnitarioActual(productoDTO.getPrecioUnitarioActual());
         producto.setDetallesEnLosQueEstaProducto(detallesEnLosQueEstaProducto);
         
         this.saveProducto(producto);
     }
     
-//    public void agregarDetalleAProductos (List<DetalleVenta> listaDetalle) {
-//        for (DetalleVenta pasoDetalle : listaDetalle) {
-//            pasoDetalle.getProducto().getDetallesEnLosQueEstaProducto().add(pasoDetalle);
-//        }
-//    }
         
 }

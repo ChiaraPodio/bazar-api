@@ -79,24 +79,27 @@ public Venta editVenta(Long codigo_venta, LocalDate nuevaFecha_venta, Long idCli
     }
     
     @Override
-     public List<DetalleVenta> crearDetalle (Venta venta, List<DetalleVentaDTO> detalleVenta) {
+     public List<DetalleVenta> crearDetalle (Venta venta, List<DetalleVentaDTO> detalleVentaDTO) {
          
-         List<DetalleVenta> detalle = new ArrayList<>();
+         List<DetalleVenta> listaDetalle = new ArrayList<>();
          
-         for (int i=0; i < detalleVenta.size(); i++) {          
-             DetalleVentaDTO detVen = detalleVenta.get(i); 
+         for (int i=0; i < detalleVentaDTO.size(); i++) { 
+             DetalleVenta detalle = new DetalleVenta();
+             DetalleVentaDTO detVen = detalleVentaDTO.get(i); 
              Producto producto = productoServ.findProducto(detVen.getIdProducto());
              
-             detalle.get(i).setVenta(venta);
+             detalle.setVenta(venta);
              productoServ.controlarStock(detVen);
-             detalle.get(i).setProducto(producto);
-             detalle.get(i).setCantidad(detVen.getCantidad());
-             detalle.get(i).setPrecioUnitarioVenta(producto.getPrecioUnitarioActual());
+             detalle.setProducto(producto);
+             detalle.setCantidad(detVen.getCantidad());
+             detalle.setPrecioUnitarioVenta(producto.getPrecioUnitarioActual());
+             detalle.setSubtotal(detalle.getPrecioUnitarioVenta()*detalle.getCantidad());
              productoServ.actualizarStock(detVen);
+             listaDetalle.add(detalle);
          }
          
          
-         return detalle;
+         return listaDetalle;
 
      }
      
@@ -146,17 +149,22 @@ public Venta editVenta(Long codigo_venta, LocalDate nuevaFecha_venta, Long idCli
         Integer cantTotal=0;
         
         for (Venta pasoVenta : listaVentas) {
-            if (pasoVenta.getFecha_venta()==fecha_venta) {
+            if (pasoVenta.getFecha_venta().equals(fecha_venta)) {
                 montoTotal+=pasoVenta.getTotal();
                 cantTotal+=1;
             }
         }
-        return String.format("En el dia hubo %d ventas. El monto total fue de %f.", cantTotal, montoTotal);
+        return String.format("En el dia hubo %d ventas. El monto total fue de %.2f.", cantTotal, montoTotal);
     }
     
     @Override
     public ClienteMayorVentaDTO getMayorVenta() {
         ClienteMayorVentaDTO clienteMayVenta = new ClienteMayorVentaDTO();
+        
+        if (this.getVentas().isEmpty()) {
+             return null; 
+        }
+        
         Venta venta = this.getVentas().get(0);
         for (Venta pasoVenta : this.getVentas()) {
             if (pasoVenta.getTotal()>venta.getTotal()) {
@@ -172,7 +180,7 @@ public Venta editVenta(Long codigo_venta, LocalDate nuevaFecha_venta, Long idCli
         clienteMayVenta.setTotal(venta.getTotal());
         clienteMayVenta.setCantProductos(cantidad);
         clienteMayVenta.setNombreCliente(venta.getUnCliente().getNombre());
-        clienteMayVenta.setNombreCliente(venta.getUnCliente().getApellido());
+        clienteMayVenta.setApellidoCliente(venta.getUnCliente().getApellido());
         
         return clienteMayVenta;
         

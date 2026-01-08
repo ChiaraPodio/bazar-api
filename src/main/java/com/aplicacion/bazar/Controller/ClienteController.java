@@ -7,28 +7,28 @@ package com.aplicacion.bazar.Controller;
 import com.aplicacion.bazar.Model.Cliente;
 import com.aplicacion.bazar.Service.IClienteService;
 import java.util.List;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author chiarapodio
  */
-@Controller
+@RestController
 public class ClienteController {
     
     private IClienteService clienteServ;
     
     @PostMapping("/clientes/crear")
-    public String saveCliente (@RequestParam String nuevoNombre,
-                               @RequestParam String nuevoApellido,
-                               @RequestParam String nuevoDni) {
-        clienteServ.generarCliente(nuevoNombre, nuevoApellido, nuevoDni);
+    public String saveCliente (@RequestParam String nombre,
+                               @RequestParam String apellido,
+                               @RequestParam String dni) {
+        clienteServ.generarCliente(nombre, apellido, dni);
         
         return "Cliente creado correctamente";
     }
@@ -44,7 +44,7 @@ public class ClienteController {
     }
     
      @PutMapping("/clientes/editar/{id_cliente}")
-    public Cliente editProducto(@PathVariable Long id_cliente,
+    public Cliente editCliente(@PathVariable Long id_cliente,
                                     @RequestParam (required = false) String nuevoNombre,
                                     @RequestParam (required = false) String nuevoApellido,
                                     @RequestParam (required = false) String nuevoDni) {
