@@ -12,8 +12,8 @@ Proyecto desarrollado en **Java con Spring Boot** para gestionar un sistema de v
 ## Funcionalidades  
 
 - CRUD de ventas, clientes y productos
-- Control y actualización de stock
-- Calculo de totales y subtotales
-- Consultas sobre ventas
+- Métodos de control y actualización de stock
+- Métodos para llevar a cabo el calculo de totales y subtotales
+- Métodos para realizar consultas sobre ventas
 - Persistencia en base de datos
 - Uso del patrón DTO y arquitectura multicapa para optimizar rendimiento y claridad del sistema 
